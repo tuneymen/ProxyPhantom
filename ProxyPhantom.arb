@@ -1,0 +1,64 @@
+print"
+-made by tunaeymen027-
+"
+print"
+██████╗ ██████╗  ██████╗ ██╗  ██╗██╗   ██╗██████╗ ██╗  ██╗ █████╗ ███╗   ██╗████████╗ ██████╗ ███╗   ███╗
+██╔══██╗██╔══██╗██╔═══██╗╚██╗██╔╝╚██╗ ██╔╝██╔══██╗██║  ██║██╔══██╗████╗  ██║╚══██╔══╝██╔═══██╗████╗ ████║
+██████╔╝██████╔╝██║   ██║ ╚███╔╝  ╚████╔╝ ██████╔╝███████║███████║██╔██╗ ██║   ██║   ██║   ██║██╔████╔██║
+██╔═══╝ ██╔══██╗██║   ██║ ██╔██╗   ╚██╔╝  ██╔═══╝ ██╔══██║██╔══██║██║╚██╗██║   ██║   ██║   ██║██║╚██╔╝██║
+██║     ██║  ██║╚██████╔╝██╔╝ ██╗   ██║   ██║     ██║  ██║██║  ██║██║ ╚████║   ██║   ╚██████╔╝██║ ╚═╝ ██║
+╚═╝     ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝   ╚═╝   ╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝   ╚═╝    ╚═════╝ ╚═╝     ╚═╝
+"
+require 'socket'
+require 'timeout'
+class ProxyPhantom
+  attr_accessor :target_ip, :ports, :timeout
+  def initialize(target_ip, ports = [8080, 3128, 1080], timeout = 5)
+    @target_ip = target_ip
+    @ports = ports
+    @timeout = timeout
+  end
+  def port_open?(port)
+    begin
+      Timeout.timeout(@timeout) do
+        s = TCPSocket.new(@target_ip, port)
+        s.close
+        return true
+      end
+    rescue
+      return false
+    end
+  end
+  def check_proxy_vulnerability(port)
+    begin
+      Timeout.timeout(@timeout) do
+        s = TCPSocket.new(@target_ip, port)
+        s.puts "GET http://example.com HTTP/1.1\r\nHost: example.com\r\n\r\n"
+        response = s.read(1024)
+        s.close
+        if response && response.include?("HTTP/1.1 200 OK")
+          puts "[+] Proxy on #{@target_ip}:#{port} is open and could be vulnerable (unauthenticated access)."
+        else
+          puts "[-] Proxy on #{@target_ip}:#{port} requires authentication or isn't accessible."
+        end
+      end
+    rescue
+      puts "[-] Proxy on #{@target_ip}:#{port} is closed or unreachable."
+    end
+  end
+  def scan
+    puts "[*] Scanning #{@target_ip} for open proxy ports..."
+    @ports.each do |port|
+      if port_open?(port)
+        puts "[+] Found open proxy port: #{@target_ip}:#{port}"
+        check_proxy_vulnerability(port)
+      else
+        puts "[-] No proxy found on #{@target_ip}:#{port}"
+      end
+    end
+  end
+end
+puts "Enter the target IP address:"
+target_ip = gets.chomp
+scanner = ProxyPhantom.new(target_ip)
+scanner.scan

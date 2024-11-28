@@ -1,0 +1,34 @@
+Turkish/TR: Ben (yapımcı), insanların bu programla ne yaptığı konusunda herhangi bir sorumluluk kabul etmiyorum.
+HackPhantom tarafından yapılmıştır.
+
+ProxyPhantom.arb dosyasını alın
+Powershell veya Terminal'e "ruby" yazın
+ProxyPhantom.arb dosyasını "ruby" cümlesinin yanındaki terminale sürükleyip bırakın
+ardından Powershell'e tıklayın
+ve enter'a basın
+
+ENGLISH/EN: I (the producer) don't take any responsibility on what people does with this program.
+Made by HackPhantom.
+
+Take the ProxyPhantom.arb file
+write "ruby" on the Powershell or Terminal
+drag and drop the ProxyPhantom.arb file into the terminal next to the "ruby" sentence
+then click on the Powershell
+and press enter
+
+Deutsch/German: Ich (der Produzent) übernehme keine Verantwortung dafür, was die Leute mit diesem Programm machen.
+Hergestellt von HackPhantom.
+
+Rufen Sie die Datei ProxyPhantom.arb ab
+Geben Sie „ruby“ in Powershell oder Terminal ein
+Ziehen Sie die Datei ProxyPhantom.arb per Drag & Drop in das Terminal neben der Phrase „Ruby“.
+Klicken Sie dann auf Powershell
+und drücken Sie die Eingabetaste
+
+French: Je (le producteur) n'assume aucune responsabilité quant à ce que les gens font avec ce programme.
+Réalisé par HackPhantom.
+
+Récupérez le fichier ProxyPhantom.arb
+Tapez "ruby" dans Powershell ou Terminal
+Faites glisser et déposez le fichier ProxyPhantom.arb dans le terminal à côté de la phrase "ruby"
+puis va sur Powershell
